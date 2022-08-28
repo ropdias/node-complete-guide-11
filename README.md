@@ -8,7 +8,7 @@ Section 15 covered:
 - [X] How is Authentication Implemented?
 - [X] Our Updated Project Status
 - [X] Implementing an Authentication Flow
-- [ ] Encrypting Passwords
+- [X] Encrypting Passwords
 - [ ] Adding a Tiny Code Improvement
 - [ ] Adding the Signin Functionality
 - [ ] Working on Route Protection
