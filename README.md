@@ -10,7 +10,7 @@ Section 15 covered:
 - [X] Implementing an Authentication Flow
 - [X] Encrypting Passwords
 - [X] Adding a Tiny Code Improvement
-- [ ] Adding the Signin Functionality
+- [X] Adding the Signin Functionality
 - [ ] Working on Route Protection
 - [ ] Using Middleware to Protect Routes
 - [ ] Understanding CSRF Attacks

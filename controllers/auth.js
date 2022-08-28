@@ -21,38 +21,42 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  // Cookies:
-  // Max-Age=10 // to expire in 10 seconds
-  // Domain=... // to set a domain
-  // Secure  // to set that the cookie should only work if the page is served via https
-  // HttpOnly // to set that we can't access the cookie value through client side javascript (scripts running in the browser)
-  // The one above can be important security mechanism because it protects us against cross-site scripting attacks now
-  // because now your client side javascript where someone could have injected malicious code can't read your cookies values and that
-  // will be important later with authentication where a cookie will not store the sensitive information but and important part of
-  // authenticating the user. This can be an extra security layer because now the cookie will still be attached to every request
-  // that is sent to the server but you can't read the cookie value from inside the browser javascript code. (In the developer tool
-  // you can still read it)
-  // res.setHeader("Set-Cookie", "loggedIn=true; Max-Age=10");
+  const email = req.body.email;
+  const password = req.body.password;
 
   // The session object is added by the session middleware with app.use(session())
-  // req.session.isLoggedIn = true;
-  User.findById("630b9e957f011c15a62b4864")
+  User.findOne({ email: email })
     .then((user) => {
-      if (user) {
-        req.session.isLoggedIn = true;
-        req.session.user = user; // This will remain a full mongoose model ONLY for this request
-        req.session.save((err) => {
-          if (err) console.log(err);
-          res.redirect("/");
-        });
-      } else {
-        console.log("User not found");
-        req.session.isLoggedIn = false;
-        req.session.save((err) => {
-          if (err) console.log(err);
-          res.redirect("/");
-        });
+      if (!user) {
+        console.log('User not found')
+        return res.redirect("/login");
       }
+      bcrypt
+        .compare(password, user.password)
+        .then((doMatch) => {
+          // We enter here independent if the password match or not (doMatch is true if it's equal, otherwise its false)
+          if (doMatch) {
+            req.session.isLoggedIn = true;
+            req.session.user = user; // This will remain a full mongoose model ONLY for this request
+            req.session.save((err) => {
+              if (err) console.log(err);
+              res.redirect("/");
+            });
+          } else {
+            console.log("Password is wrong !");
+            req.session.isLoggedIn = false;
+            req.session.user = null;
+            req.session.save((err) => {
+              if (err) console.log(err);
+              res.redirect("/login");
+            });
+          }
+        })
+        .catch((err) => {
+          // We enter here if something goes wrong with the compare function (not regarding if the password match or not)
+          console.log(err);
+          res.redirect("/login");
+        });
     })
     .catch((err) => console.log(err));
 };
