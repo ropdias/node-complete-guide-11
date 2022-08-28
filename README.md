@@ -11,7 +11,7 @@ Section 15 covered:
 - [X] Encrypting Passwords
 - [X] Adding a Tiny Code Improvement
 - [X] Adding the Signin Functionality
-- [ ] Working on Route Protection
+- [X] Working on Route Protection
 - [ ] Using Middleware to Protect Routes
 - [ ] Understanding CSRF Attacks
 - [ ] Using a CSRF Token

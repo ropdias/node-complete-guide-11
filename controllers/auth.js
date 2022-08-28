@@ -28,7 +28,7 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
-        console.log('User not found')
+        console.log("User not found");
         return res.redirect("/login");
       }
       bcrypt
