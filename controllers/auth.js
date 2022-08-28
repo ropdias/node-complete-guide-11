@@ -55,7 +55,34 @@ exports.postLogin = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.postSignup = (req, res, next) => {};
+exports.postSignup = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
+
+  // We will validate user input (like checking if it's the same password) in a later section
+  // So will just ignore validation for now
+
+  User.findOne({ email: email })
+    .then((userDoc) => {
+      if (userDoc) {
+        // We will just redirect for now and not inform the user
+        return res.redirect("/signup");
+      }
+      const user = new User({
+        email: email,
+        password: password,
+        cart: { items: [] },
+      });
+      return user.save();
+    })
+    .then((result) => {
+      res.redirect("/login");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy((err) => {
