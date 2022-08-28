@@ -12,7 +12,7 @@ Section 15 covered:
 - [X] Adding a Tiny Code Improvement
 - [X] Adding the Signin Functionality
 - [X] Working on Route Protection
-- [ ] Using Middleware to Protect Routes
+- [x] Using Middleware to Protect Routes
 - [ ] Understanding CSRF Attacks
 - [ ] Using a CSRF Token
 - [ ] Adding CSRF Protection
