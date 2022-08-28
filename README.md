@@ -9,7 +9,7 @@ Section 15 covered:
 - [X] Our Updated Project Status
 - [X] Implementing an Authentication Flow
 - [X] Encrypting Passwords
-- [ ] Adding a Tiny Code Improvement
+- [X] Adding a Tiny Code Improvement
 - [ ] Adding the Signin Functionality
 - [ ] Working on Route Protection
 - [ ] Using Middleware to Protect Routes
