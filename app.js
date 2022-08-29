@@ -60,6 +60,13 @@ app.use((req, res, next) => {
     .catch((err) => console.log(err));
 });
 
+// We can use res.locals here to add "isAuthenticated" and "csrfToken" to every view:
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.csrfToken = req.csrfToken(); // we are getting this method that is provided from the csrf middleware
+  next();
+});
+
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);

@@ -15,7 +15,7 @@ Section 15 covered:
 - [x] Using Middleware to Protect Routes
 - [x] Understanding CSRF Attacks
 - [x] Using a CSRF Token
-- [ ] Adding CSRF Protection
+- [x] Adding CSRF Protection
 - [ ] Fixing the Order Button
 - [ ] Providing User Feedback
 - [ ] Optional: Styling Error Messages
