@@ -18,7 +18,7 @@ Section 15 covered:
 - [x] Adding CSRF Protection
 - [x] Fixing the Order Button
 - [x] Providing User Feedback
-- [ ] Optional: Styling Error Messages
+- [x] Optional: Styling Error Messages
 - [ ] Finishing the Flash Messages
 - [ ] Adding Additional Flash Messages
 
