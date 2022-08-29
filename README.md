@@ -16,7 +16,7 @@ Section 15 covered:
 - [x] Understanding CSRF Attacks
 - [x] Using a CSRF Token
 - [x] Adding CSRF Protection
-- [ ] Fixing the Order Button
+- [x] Fixing the Order Button
 - [ ] Providing User Feedback
 - [ ] Optional: Styling Error Messages
 - [ ] Finishing the Flash Messages
