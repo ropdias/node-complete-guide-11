@@ -13,8 +13,8 @@ Section 15 covered:
 - [X] Adding the Signin Functionality
 - [X] Working on Route Protection
 - [x] Using Middleware to Protect Routes
-- [ ] Understanding CSRF Attacks
-- [ ] Using a CSRF Token
+- [x] Understanding CSRF Attacks
+- [x] Using a CSRF Token
 - [ ] Adding CSRF Protection
 - [ ] Fixing the Order Button
 - [ ] Providing User Feedback

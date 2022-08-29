@@ -36,6 +36,7 @@ exports.getIndex = (req, res, next) => {
         pageTitle: "Shop",
         path: "/",
         isAuthenticated: req.session.isLoggedIn,
+        csrfToken: req.csrfToken(), // we are getting this method that is provided from the csrf middleware
       });
     })
     .catch((err) => console.log(err));

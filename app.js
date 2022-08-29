@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const csrf = require("csurf");
 
 const errorControler = require("./controllers/error");
 const User = require("./models/user");
@@ -18,6 +19,8 @@ const store = new MongoDBStore({
   collection: "sessions", // You define here the collections you will use to store the sessions, we can use any name here
   // expires: ... // We could add a expires attribute to set when it should expire and mongodb will clean automatically
 });
+// We can pass an object to csrf({}) to configure some stuff like "cookie" (to store the secret in a cookie instead of a session (default))
+const csrfProtection = csrf();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -41,6 +44,8 @@ app.use(
     store: store, // This attribute sets where we want to store the sessions
   })
 );
+// We need to use the csrf middleware AFTER we initialize the session, because it use it:
+app.use(csrfProtection);
 
 // You need this middleware to get the full mongoose model so we can call all methods directly on that user for this request:
 app.use((req, res, next) => {
