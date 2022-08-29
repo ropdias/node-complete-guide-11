@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
+const flash = require('connect-flash');
 
 const errorControler = require("./controllers/error");
 const User = require("./models/user");
@@ -46,6 +47,7 @@ app.use(
 );
 // We need to use the csrf middleware AFTER we initialize the session, because it use it:
 app.use(csrfProtection);
+app.use(flash());
 
 // You need this middleware to get the full mongoose model so we can call all methods directly on that user for this request:
 app.use((req, res, next) => {

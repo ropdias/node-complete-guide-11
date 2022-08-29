@@ -8,6 +8,7 @@ exports.getLogin = (req, res, next) => {
   res.render("auth/login", {
     path: "/login",
     pageTitle: "Login",
+    errorMessage: req.flash('error'), // What I stored in 'error' will be retrivied here, and after we get it, it will be removed from the session
   });
 };
 
@@ -26,7 +27,7 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
-        console.log("User not found");
+        req.flash('error', 'Invalid email or password.'); // We use both (email and password) here so people don't know which part was wrong
         return res.redirect("/login");
       }
       bcrypt
