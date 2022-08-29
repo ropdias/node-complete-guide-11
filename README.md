@@ -20,7 +20,7 @@ Section 15 covered:
 - [x] Providing User Feedback
 - [x] Optional: Styling Error Messages
 - [x] Finishing the Flash Messages
-- [ ] Adding Additional Flash Messages
+- [x] Adding Additional Flash Messages
 
 
 

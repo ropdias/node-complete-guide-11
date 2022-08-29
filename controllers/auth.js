@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 exports.getLogin = (req, res, next) => {
-  let message = req.flash('error'); // What I stored in 'error' will be retrivied here, and after we get it, it will be removed from the session
+  let message = req.flash("error"); // What I stored in 'error' will be retrivied here, and after we get it, it will be removed from the session
   // We need the validation below because flash() returns an array and we need to check if it has something, otherwise set it to null
   // So we can use in the views: <% if (errorMessage) { %> ...
   if (message.length > 0) {
@@ -11,18 +11,26 @@ exports.getLogin = (req, res, next) => {
   } else {
     message = null;
   }
-  console.log(req.flash('error'));
   res.render("auth/login", {
     path: "/login",
     pageTitle: "Login",
-    errorMessage: message, 
+    errorMessage: message,
   });
 };
 
 exports.getSignup = (req, res, next) => {
+  let message = req.flash("error"); // What I stored in 'error' will be retrivied here, and after we get it, it will be removed from the session
+  // We need the validation below because flash() returns an array and we need to check if it has something, otherwise set it to null
+  // So we can use in the views: <% if (errorMessage) { %> ...
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
   res.render("auth/signup", {
     path: "/signup",
     pageTitle: "Signup",
+    errorMessage: message,
   });
 };
 
@@ -34,7 +42,7 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
-        req.flash('error', 'Invalid email or password.'); // We use both (email and password) here so people don't know which part was wrong
+        req.flash("error", "Invalid email or password."); // We use both (email and password) here so people don't know which part was wrong
         return res.redirect("/login");
       }
       bcrypt
@@ -49,7 +57,7 @@ exports.postLogin = (req, res, next) => {
               res.redirect("/");
             });
           } else {
-            console.log("Password is wrong !");
+            req.flash("error", "Invalid email or password."); // We use both (email and password) here so people don't know which part was wrong
             req.session.isLoggedIn = false;
             req.session.user = null;
             req.session.save((err) => {
@@ -78,7 +86,10 @@ exports.postSignup = (req, res, next) => {
   User.findOne({ email: email })
     .then((userDoc) => {
       if (userDoc) {
-        // We will just redirect for now and not inform the user
+        req.flash(
+          "error",
+          "E-mail exists already, please pick a different one."
+        );
         return res.redirect("/signup");
       }
       return bcrypt
