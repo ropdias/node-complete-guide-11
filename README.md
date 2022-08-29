@@ -19,7 +19,7 @@ Section 15 covered:
 - [x] Fixing the Order Button
 - [x] Providing User Feedback
 - [x] Optional: Styling Error Messages
-- [ ] Finishing the Flash Messages
+- [x] Finishing the Flash Messages
 - [ ] Adding Additional Flash Messages
 
 

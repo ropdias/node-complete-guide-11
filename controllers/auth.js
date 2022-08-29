@@ -3,12 +3,19 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 exports.getLogin = (req, res, next) => {
-  // const isLoggedIn =
-  //   req.get("Cookie").split(";")[0].trim().split("=")[1] === "true";
+  let message = req.flash('error'); // What I stored in 'error' will be retrivied here, and after we get it, it will be removed from the session
+  // We need the validation below because flash() returns an array and we need to check if it has something, otherwise set it to null
+  // So we can use in the views: <% if (errorMessage) { %> ...
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
+  console.log(req.flash('error'));
   res.render("auth/login", {
     path: "/login",
     pageTitle: "Login",
-    errorMessage: req.flash('error'), // What I stored in 'error' will be retrivied here, and after we get it, it will be removed from the session
+    errorMessage: message, 
   });
 };
 
