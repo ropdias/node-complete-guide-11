@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const User = require("../models/user");
 
 exports.getAddProduct = (req, res, next) => {
   if (!req.session.isLoggedIn) {
@@ -104,6 +105,12 @@ exports.postDeleteProduct = (req, res, next) => {
   // Fetch information from the product
   const prodId = req.body.productId;
   Product.findByIdAndRemove(prodId)
+    .then(() => {
+      return User.updateMany(
+        {},
+        { $pull: { "cart.items": { productId: prodId } } }
+      );
+    })
     .then(() => {
       console.log("Deleted product and removed it from every cart !");
       res.redirect("/admin/products");
